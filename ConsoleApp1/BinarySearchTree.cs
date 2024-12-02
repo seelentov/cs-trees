@@ -2,14 +2,8 @@ using System;
 
 namespace ConsoleApp1;
 
-public class BinarySearchTree
+public class BinarySearchTree : BinaryTree
 {
-    public Node? RootNode { get; private set; } = null;
-
-    public override string ToString()
-    {
-        return RootNode != null ? RootNode.ToString() : "";
-    }
 
     public Node GetMin(Node? node = null)
     {
@@ -65,7 +59,7 @@ public class BinarySearchTree
         }
     }
 
-    public void Add(int value)
+    public virtual void Add(int value)
     {
         if (RootNode == null)
         {
@@ -111,7 +105,7 @@ public class BinarySearchTree
         }
     }
 
-    public void Remove(int value)
+    public virtual void Remove(int value)
     {
         if (RootNode == null)
         {
@@ -178,79 +172,6 @@ public class BinarySearchTree
             }
         }
 
-    }
-
-    public List<int> ByPass(Node? node = null, bool first = true, List<int> list = null)
-    {
-        if (RootNode == null)
-        {
-            return [];
-        }
-
-        if (node == null && first)
-        {
-            node = RootNode;
-        }
-
-        else if (node == null)
-        {
-            return [];
-        }
-
-        if (list == null)
-        {
-            list = [];
-        }
-
-        ByPass(node?.Left, false, list);
-        if (node != null) list.Add(node.Value);
-        ByPass(node?.Right, false, list);
-
-        return list;
-    }
-
-    public List<int> ByPassReverse(Node? node = null, bool first = true, List<int> list = null)
-    {
-        if (RootNode == null)
-        {
-            return [];
-        }
-
-        if (node == null && first)
-        {
-            node = RootNode;
-        }
-
-        else if (node == null)
-        {
-            return [];
-        }
-
-        if (list == null)
-        {
-            list = [];
-        }
-
-        ByPassReverse(node?.Left, false, list);
-        ByPassReverse(node?.Right, false, list);
-        if (node != null) list.Add(node.Value);
-
-        return list;
-    }
-
-    public void PrintTree(Node? node = null, bool first = true)
-    {
-        foreach (var value in ByPass(node))
-        {
-            Console.WriteLine(value);
-        }
-    }
-    public void PrintTreeReverse(Node? node = null, bool first = true)
-    {
-        foreach (var value in ByPassReverse(node))
-        {
-            Console.WriteLine(value);
-        }
     }
 
     public void RemoveRecursive(int value)
